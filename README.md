@@ -20,7 +20,12 @@ thembalethu_bnb/
 ├── js/
 │   └── script.js    # Page interactions
 └── backend/
-    └── .gitkeep     # Reserved for future backend code
+    └── src/main/java/com/ungasokoli/
+        ├── dto/        # Enquiry request and response types
+        ├── exception/  # Enquiry-related exceptions
+        ├── model/      # Booking enquiry model and status
+        ├── repository/ # Booking enquiry repository contract
+        └── service/    # Enquiry and availability service types
 ```
 
 ## Run locally
@@ -32,5 +37,5 @@ directory, start a local server:
 python3 -m http.server 8000
 ```
 
-Then open <http://localhost:8000>. The `backend/` directory is only a placeholder;
-no backend framework or server-side functionality is configured yet.
+Then open <http://localhost:8000>. The `backend/` directory contains Java type
+skeletons only; no backend framework or server-side functionality is configured yet.

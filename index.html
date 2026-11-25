@@ -95,15 +95,50 @@
   <span class="clock-icon" aria-hidden="true">🕒</span>
   <div><strong>Your stay is booked for 24 hours.</strong> Your checkout time is the same time as your agreed check-in time on the following day. For example, check in at 14:00 today and check out at 14:00 tomorrow. Please confirm your check-in time with us when making your booking.</div>
 </div>
-<div class="container booking-wrap" id="booking"><form class="booking-card reveal" id="bookingForm">
-<div class="booking-heading"><strong>Make time to unwind.</strong><span>R500 per 24 hours · Enquire directly with the host.</span></div>
-<div class="field"><label for="guestName">Your name</label><input id="guestName" name="name" autocomplete="name" placeholder="How should we address you?" required></div>
-<div class="field"><label for="arrivalDate">Check-in date</label><input id="arrivalDate" name="date" type="date" required></div>
-<div class="field"><label for="guestContact">Contact number</label><input id="guestContact" name="contact" type="tel" autocomplete="tel" inputmode="tel" placeholder="Your phone number" required></div>
-<div class="field"><label for="arrivalTime">Arrival time</label><input id="arrivalTime" name="time" type="time" value="14:00" required></div>
-<div class="field"><label for="duration">Duration (24-hour periods)</label><input id="duration" name="duration" type="number" min="1" step="1" value="1" required></div>
-<button class="btn booking-submit" type="submit">Request to book <span class="arrow">↗</span></button>
-<div class="booking-feedback"><span id="bookingMessage">Your enquiry is not a confirmed booking. The host will confirm availability. No online payment is taken.</span></div>
+<div class="booking-wrap" id="booking"><form class="booking-card reveal" id="bookingForm">
+  <div class="booking-heading">
+    <div class="booking-title">
+      <span class="booking-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 32V18m0 14v4m32-4v4M8 32h32M12 32V23a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v9m0 0V23a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v9" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <strong>Make time to <em>unwind.</em></strong>
+    </div>
+    <span class="booking-price"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2 5 13h5l-.8 9L19 10h-5l-.8-8Z" fill="currentColor"/></svg>R500 per 24 hours <i aria-hidden="true">·</i> Enquire directly with the host.</span>
+  </div>
+  <div class="booking-mode" role="group" aria-label="Choose duration unit">
+    <button class="booking-mode-option is-active" type="button" data-duration-unit="days" aria-pressed="true">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M8 3v4m8-4v4M4 10h16m-11 5 2 2 4-4"/></svg>Days
+    </button>
+    <button class="booking-mode-option" type="button" data-duration-unit="hours" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Hours
+    </button>
+  </div>
+  <div class="booking-fields">
+    <div class="field booking-field">
+      <label for="guestName"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0Z"/></svg>Your name</label>
+      <input id="guestName" name="name" autocomplete="name" placeholder="How should we address you?" required>
+    </div>
+    <div class="field booking-field">
+      <label for="arrivalDate"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18"/></svg>Check-in date</label>
+      <input id="arrivalDate" name="date" type="date" required>
+    </div>
+    <div class="field booking-field">
+      <label for="guestContact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3H4a1 1 0 0 0-1 1 17 17 0 0 0 17 17 1 1 0 0 0 1-1v-3l-5-2-2 3a14 14 0 0 1-5-5l3-2-2-5Z"/></svg>Contact number</label>
+      <input id="guestContact" name="contact" type="tel" autocomplete="tel" inputmode="tel" placeholder="Your phone number" required>
+    </div>
+    <div class="field booking-field booking-duration-field">
+      <label for="duration"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Duration</label>
+      <div class="duration-control">
+        <input id="duration" name="duration" type="number" min="1" step="1" value="1" aria-describedby="durationUnit" required>
+        <span class="duration-unit" id="durationUnit">Day(s)</span>
+      </div>
+    </div>
+  </div>
+  <div class="booking-actions">
+    <button class="btn booking-submit" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M7 2v4m10-4v4M3 9h18m-12 6 2 2 4-4"/></svg>Request to book <span class="arrow" aria-hidden="true">→</span></button>
+    <div class="booking-feedback">
+      <svg viewBox="0 0 40 44" aria-hidden="true"><path d="M20 2 35 8v11c0 10-6 17-15 22C11 36 5 29 5 19V8l15-6Z"/><path d="m12 21 5 5 11-12"/></svg>
+      <span id="bookingMessage">Your enquiry is not a confirmed booking. The host will confirm availability. No online payment is taken.</span>
+    </div>
+  </div>
 </form></div>
 <section class="section" id="stay"><div class="container intro-grid">
 <div class="intro-title reveal"><span class="eyebrow">Your space to relax</span><h2>Simple comforts.<br><em>A warm welcome.</em></h2>

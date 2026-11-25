@@ -5,7 +5,23 @@ const restart=()=>{clearInterval(timer);if(!matchMedia('(prefers-reduced-motion:
 document.getElementById('prevSlide').addEventListener('click',()=>{showSlide(current-1);restart()});document.getElementById('nextSlide').addEventListener('click',()=>{showSlide(current+1);restart()});dots.forEach(d=>d.addEventListener('click',()=>{showSlide(Number(d.dataset.dot));restart()}));restart();
 const dateInput=document.getElementById('arrivalDate'),now=new Date(),localDate=new Date(now-now.getTimezoneOffset()*60000).toISOString().slice(0,10);dateInput.min=localDate;
 const duration=document.getElementById('duration');
-duration.addEventListener('input',()=>{duration.setCustomValidity(!duration.value||!Number.isInteger(Number(duration.value))||Number(duration.value)<1?'Choose at least one whole 24-hour period.':'')});
+let durationUnit='days';
+const durationUnitLabel=document.getElementById('durationUnit');
+const updateDurationValidity=()=>{
+  const isValid=duration.value&&Number.isInteger(Number(duration.value))&&Number(duration.value)>=1;
+  duration.setCustomValidity(isValid?'':`Choose at least one whole ${durationUnit==='days'?'day':'hour'}.`);
+};
+document.querySelectorAll('[data-duration-unit]').forEach(button=>button.addEventListener('click',()=>{
+  durationUnit=button.dataset.durationUnit;
+  document.querySelectorAll('[data-duration-unit]').forEach(option=>{
+    const isActive=option===button;
+    option.classList.toggle('is-active',isActive);
+    option.setAttribute('aria-pressed',String(isActive));
+  });
+  durationUnitLabel.textContent=durationUnit==='days'?'Day(s)':'Hour(s)';
+  updateDurationValidity();
+}));
+duration.addEventListener('input',updateDurationValidity);
 const bookingDialog=document.getElementById('bookingDialog');
 const bookingWhatsAppLink=document.getElementById('bookingWhatsAppLink');
 document.getElementById('bookingForm').addEventListener('submit',e=>{
@@ -14,11 +30,11 @@ document.getElementById('bookingForm').addEventListener('submit',e=>{
   if(!form.reportValidity())return;
   const name=document.getElementById('guestName').value.trim();
   const date=dateInput.value;
-  const time=document.getElementById('arrivalTime').value;
   const contact=document.getElementById('guestContact').value.trim();
-  const periods=parseInt(duration.value,10);
+  const requestedDuration=parseInt(duration.value,10);
   const readableDate=new Date(date+'T12:00:00').toLocaleDateString('en-ZA',{day:'numeric',month:'long',year:'numeric'});
-  const message=`Hello Thembalethu BnB! My name is ${name}. My contact number is ${contact}. I would like to enquire about a stay starting ${readableDate} at ${time}, for ${periods} 24-hour period(s). I understand the rate is R500 per 24 hours. Please confirm availability and let me know the next steps. Thank you.`;
+  const requestedUnit=durationUnit==='days'?'day(s)':'hour(s)';
+  const message=`Hello Thembalethu BnB! My name is ${name}. My contact number is ${contact}. I would like to enquire about a stay starting ${readableDate}, for ${requestedDuration} ${requestedUnit}. I understand the rate is R500 per 24 hours. Please confirm availability, check-in time, and the total cost. Thank you.`;
   bookingWhatsAppLink.href='https://wa.me/27784979718?text='+encodeURIComponent(message);
   bookingDialog.showModal();
 });
